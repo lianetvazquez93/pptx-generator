@@ -2,7 +2,8 @@ import tempfile
 from pptx import Presentation
 from pptx.util import Inches
 
-def create_pptx(prs_content, file_name):
+
+def create(filename, prs_content):
     prs = Presentation()
 
     content_slide_layout = prs.slide_layouts[0]
@@ -15,8 +16,6 @@ def create_pptx(prs_content, file_name):
     content = slide.shapes.add_textbox(left, top, width, height)
 
     content.text = prs_content
-    pptx_path = tempfile.gettempdir() + '/' + file_name
+    pptx_path = tempfile.gettempdir() + '/' + filename
     prs.save(pptx_path)
     return pptx_path
-    
-
