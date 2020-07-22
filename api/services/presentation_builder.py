@@ -2,7 +2,7 @@ import io
 from helpers import pptx
 
 
-def generate(filename, content):
+def build(filename, content):
     presentation_path = pptx.create(filename, content)
 
     with open(presentation_path, 'rb') as f:

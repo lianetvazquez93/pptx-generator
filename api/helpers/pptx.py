@@ -4,6 +4,9 @@ from pptx.util import Inches
 
 
 def create(filename, prs_content):
+    if (not ('.pptx' in filename)):
+        filename += '.pptx'
+
     prs = Presentation()
 
     content_slide_layout = prs.slide_layouts[0]
