@@ -1,14 +1,17 @@
 import React from "react";
+import generatePresentation from "./services/presentationGenerator";
 
 class App extends React.Component {
   state = {
-    content: "",
     filename: "",
+    content: "",
   };
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+
+    generatePresentation(this.state.filename, this.state.content);
+
     this.setState({
       content: "",
       filename: "",
