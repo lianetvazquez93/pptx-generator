@@ -54,4 +54,4 @@ yarn start
 
 ### TODO
 
-Check (TODO.md)[./TODO.md] for more information
+Check [TODO.md](./TODO.md) for more information
