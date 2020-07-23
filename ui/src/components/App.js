@@ -1,20 +1,29 @@
 import React from "react";
-import generatePresentation from "./services/presentationGenerator";
+import presentationGenerator from "../services/presentationGenerator";
 
 class App extends React.Component {
   state = {
     filename: "",
     content: "",
+    backgroundColor: "#ffffff",
+    textColor: "#000000",
   };
 
   onFormSubmit = (event) => {
     event.preventDefault();
 
-    generatePresentation(this.state.filename, this.state.content);
+    presentationGenerator(
+      this.state.filename,
+      this.state.content,
+      this.state.backgroundColor,
+      this.state.textColor
+    );
 
     this.setState({
       content: "",
       filename: "",
+      backgroundColor: "#ffffff",
+      textColor: "#000000",
     });
   };
 
@@ -33,6 +42,22 @@ class App extends React.Component {
           type="text"
           value={this.state.filename}
           onChange={(event) => this.setState({ filename: event.target.value })}
+        />
+        <br />
+        <label>Background Color: </label>
+        <input
+          type="color"
+          value={this.state.backgroundColor}
+          onChange={(event) =>
+            this.setState({ backgroundColor: event.target.value })
+          }
+        />
+        <br />
+        <label>Text Color: </label>
+        <input
+          type="color"
+          value={this.state.textColor}
+          onChange={(event) => this.setState({ textColor: event.target.value })}
         />
         <br />
         <button type="submit" onClick={this.onFormSubmit}>
