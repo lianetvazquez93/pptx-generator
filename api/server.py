@@ -23,6 +23,7 @@ def assert_params(request_data, params):
         if (not param in request_data):
             raise MissingData('{} field is missing'.format(param))
 
+
 @app.route('/generate', methods=['POST'])
 def generate():
     request_data = request.get_json()
@@ -42,5 +43,5 @@ def generate():
             filename, content, background_color, text_color)
         return send_file(presentation_stream, attachment_filename=filename,
                          mimetype=PPTX_MIME)
-    except Exception:
-        raise BadRequest()
+    except Exception as err:
+        raise BadRequest(err)

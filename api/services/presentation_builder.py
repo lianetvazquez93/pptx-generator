@@ -9,7 +9,7 @@ def build(filename, content, background_color, text_color):
         filename, content, background_color, text_color)
     except Exception as err:
         logging.error(err)
-        raise err
+        raise Exception("Unexpected error while generating pptx")
 
     with open(presentation_path, 'rb') as f:
         return io.BytesIO(f.read())

@@ -23,7 +23,9 @@ class InputPanel extends React.Component {
       this.state.content,
       this.state.backgroundColor,
       this.state.textColor
-    );
+    ).catch((error) => {
+      this.props.handleError(error.message);
+    });
 
     this.setState({
       filename: "",
