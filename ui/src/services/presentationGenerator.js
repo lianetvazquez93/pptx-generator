@@ -16,7 +16,7 @@ const handleError = (errorCode, errorMessage) => {
 export default async (filename, content, backgroundColor, textColor) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/generate",
+      `${process.env.REACT_APP_API_URL}/generate`,
       {
         filename,
         content,

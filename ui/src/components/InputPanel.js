@@ -1,5 +1,4 @@
 import React from "react";
-import presentationGenerator from "../services/presentationGenerator";
 
 class InputPanel extends React.Component {
   state = {
@@ -18,14 +17,7 @@ class InputPanel extends React.Component {
   generatePresentation = (event) => {
     event.preventDefault();
 
-    presentationGenerator(
-      this.state.filename,
-      this.state.content,
-      this.state.backgroundColor,
-      this.state.textColor
-    ).catch((error) => {
-      this.props.handleError(error.message);
-    });
+    this.props.generatePresentation(this.state);
 
     this.setState({
       filename: "",

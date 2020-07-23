@@ -2,6 +2,7 @@ import React from "react";
 import PreviewPanel from "./PreviewPanel";
 import InputPanel from "./InputPanel";
 import ErrorWell from "./ErrorWell";
+import presentationGenerator from "../services/presentationGenerator";
 
 class App extends React.Component {
   state = {
@@ -14,13 +15,13 @@ class App extends React.Component {
     errorMsg: "",
   };
 
-  handleError(errorMsg) {
+  handleError = (errorMsg) => {
     this.setState({
       hasErrors: true,
       errorMsg,
     });
     console.log(this.state.hasErrors);
-  }
+  };
 
   previewPresentation = ({ filename, content, backgroundColor, textColor }) => {
     this.setState({
@@ -31,10 +32,26 @@ class App extends React.Component {
     });
   };
 
+  generatePresentation = ({
+    filename,
+    content,
+    backgroundColor,
+    textColor,
+  }) => {
+    presentationGenerator(
+      filename,
+      content,
+      backgroundColor,
+      textColor
+    ).catch((error) => this.handleError(error.message));
+  };
+
   render() {
     return (
       <div>
-        { this.state.hasErrors ? <ErrorWell message={this.state.errorMsg} /> : null }
+        {this.state.hasErrors ? (
+          <ErrorWell message={this.state.errorMsg} />
+        ) : null}
         <div className="container-fluid">
           <PreviewPanel
             content={this.state.content}
@@ -43,8 +60,9 @@ class App extends React.Component {
             textColor={this.state.textColor}
           />
           <InputPanel
-            handleError={this.handleError.bind(this)}
+            handleError={this.handleError}
             previewPresentation={this.previewPresentation}
+            generatePresentation={this.generatePresentation}
           />
         </div>
       </div>

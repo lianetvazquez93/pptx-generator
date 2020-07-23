@@ -12,7 +12,6 @@
 
 ## UI
 
- - [ ] Environment variables
  - [ ] Tests
  - [ ] Responsiveness
  - [ ] Store for centralized state management.
