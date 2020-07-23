@@ -25,7 +25,11 @@ def create(filename, prs_content, background_color, text_color):
 
     content = slide.shapes.add_textbox(left, top, width, height)
     content.text = prs_content
-    
+
+    # most of the shapes only contain one paragraph for this use case
+    content.text_frame.paragraphs[0].font.color.rgb = RGBColor(
+        text_color[0], text_color[1], text_color[2])
+
     pptx_path = tempfile.gettempdir() + '/' + filename
     prs.save(pptx_path)
     return pptx_path

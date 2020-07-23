@@ -1,4 +1,5 @@
 import io
+import logging
 from helpers import ppt
 
 
@@ -7,7 +8,7 @@ def build(filename, content, background_color, text_color):
         presentation_path = ppt.create(
         filename, content, background_color, text_color)
     except Exception as err:
-        print(err)
+        logging.error(err)
         raise err
 
     with open(presentation_path, 'rb') as f:
