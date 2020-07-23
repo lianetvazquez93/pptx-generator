@@ -1,68 +1,35 @@
 import React from "react";
-import presentationGenerator from "../services/presentationGenerator";
+import PreviewPanel from "./PreviewPanel";
+import InputPanel from "./InputPanel";
 
 class App extends React.Component {
   state = {
-    filename: "",
-    content: "",
+    filename: "default.pptx",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     backgroundColor: "#ffffff",
     textColor: "#000000",
   };
 
-  onFormSubmit = (event) => {
-    event.preventDefault();
-
-    presentationGenerator(
-      this.state.filename,
-      this.state.content,
-      this.state.backgroundColor,
-      this.state.textColor
-    );
-
+  previewPresentation = ({ filename, content, backgroundColor, textColor }) => {
     this.setState({
-      content: "",
-      filename: "",
-      backgroundColor: "#ffffff",
-      textColor: "#000000",
+      filename,
+      content,
+      backgroundColor,
+      textColor,
     });
   };
 
   render() {
     return (
-      <div className="app">
-        <label>Enter content: </label>
-        <input
-          type="text"
-          value={this.state.content}
-          onChange={(event) => this.setState({ content: event.target.value })}
+      <div className="container-fluid">
+        <PreviewPanel
+          content={this.state.content}
+          filename={this.state.filename}
+          backgroundColor={this.state.backgroundColor}
+          textColor={this.state.textColor}
         />
-        <br />
-        <label>Enter file name: </label>
-        <input
-          type="text"
-          value={this.state.filename}
-          onChange={(event) => this.setState({ filename: event.target.value })}
-        />
-        <br />
-        <label>Background Color: </label>
-        <input
-          type="color"
-          value={this.state.backgroundColor}
-          onChange={(event) =>
-            this.setState({ backgroundColor: event.target.value })
-          }
-        />
-        <br />
-        <label>Text Color: </label>
-        <input
-          type="color"
-          value={this.state.textColor}
-          onChange={(event) => this.setState({ textColor: event.target.value })}
-        />
-        <br />
-        <button type="submit" onClick={this.onFormSubmit}>
-          Generate Presentation
-        </button>
+        <InputPanel previewPresentation={this.previewPresentation} />
       </div>
     );
   }
